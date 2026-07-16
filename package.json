@@ -1,0 +1,32 @@
+{
+  "name": "@spatialhydro/flashcast-sdk",
+  "version": "0.1.0",
+  "description": "FLASHCAST HTTP contracts and client (no UI)",
+  "type": "module",
+  "sideEffects": false,
+  "engines": { "node": ">=18" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./contracts": { "types": "./dist/contracts.d.ts", "import": "./dist/contracts.js" },
+    "./client": { "types": "./dist/client.d.ts", "import": "./dist/client.js" },
+    "./requests": { "types": "./dist/requests.d.ts", "import": "./dist/requests.js" },
+    "./calibration": { "types": "./dist/calibration.d.ts", "import": "./dist/calibration.js" },
+    "./check-backend": { "types": "./dist/checkBackend.d.ts", "import": "./dist/checkBackend.js" }
+  },
+  "bin": {
+    "flashcast-smoke": "./dist/cli.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "test:smoke": "npm run build && node --test test/integration/rust-proxy.smoke.test.mjs",
+    "smoke": "npm run build && node dist/cli.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
